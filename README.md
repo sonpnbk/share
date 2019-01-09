@@ -1,42 +1,14 @@
-# share
-
-select * from m_ServiceRate where ID in ('9706c8b6-66e5-4997-9313-70ce497410ad','77bc2182-f267-4536-91ea-ded955d944e0','1f967207-7a43-44ac-a172-acfef129956a','55046469-97e1-403e-a448-3da4599e3663')
-
-CREATE PROCEDURE UpdateServiceRate2
-AS
-BEGIN
-DECLARE @id uniqueidentifier
-DECLARE db_cursor CURSOR FOR select ID from m_ServiceRate where SiteID = '7FEF66FB-2962-4A78-8323-119D63D5E6DF' and StartDate = '2018-12-31'
-OPEN db_cursor  
-FETCH NEXT FROM db_cursor INTO @id  
-
-WHILE @@FETCH_STATUS = 0  
-BEGIN  
-	Update m_ServiceRate set StartDate = '2018-12-26' where ID = @id
-
-	Insert into m_ServiceRateDaily(ID, ServiceRateID, ApplyDate, IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, CreatedDate, IsDelete)
-	select newid(), ServiceRateID , '2018-12-26', IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, GETDATE(), IsDelete from m_ServiceRateDaily where ApplyDate = '2018-12-31' and ServiceRateID = @id
-
-	Insert into m_ServiceRateDaily(ID, ServiceRateID, ApplyDate, IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, CreatedDate, IsDelete)
-	select newid(), ServiceRateID , '2018-12-27', IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, GETDATE(), IsDelete from m_ServiceRateDaily where ApplyDate = '2018-12-31' and ServiceRateID = @id
-
-	Insert into m_ServiceRateDaily(ID, ServiceRateID, ApplyDate, IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, CreatedDate, IsDelete)
-	select newid(), ServiceRateID , '2018-12-28', IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, GETDATE(), IsDelete from m_ServiceRateDaily where ApplyDate = '2018-12-31' and ServiceRateID = @id
-
-	Insert into m_ServiceRateDaily(ID, ServiceRateID, ApplyDate, IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, CreatedDate, IsDelete)
-	select newid(), ServiceRateID , '2018-12-29', IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, GETDATE(), IsDelete from m_ServiceRateDaily where ApplyDate = '2018-12-31' and ServiceRateID = @id
-
-	Insert into m_ServiceRateDaily(ID, ServiceRateID, ApplyDate, IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, CreatedDate, IsDelete)
-	select newid(), ServiceRateID , '2018-12-30', IncludeTaxes, NetPrice, RateType, SellPrice, IndexingRequire, StopSell, StopPromotion, Inactive, CreatedBy, GETDATE(), IsDelete from m_ServiceRateDaily where ApplyDate = '2018-12-31' and ServiceRateID = @id
-
-
-	FETCH NEXT FROM db_cursor INTO @id
-END 
-CLOSE db_cursor  
-DEALLOCATE db_cursor
-END
-GO
-exec dbo.UpdateServiceRate2
-GO
-drop procedure dbo.UpdateServiceRate2
-go
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('3ED230FB-712C-42EA-9786-02A267DCF0D0','943608AC-6C6E-4E66-8050-3167CF276969','1F967207-7A43-44AC-A172-ACFEF129956A', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('422AB6B3-20B7-45C4-87B6-36CBB8AE4D86','943608AC-6C6E-4E66-8050-3167CF276969','0E8B876F-2F6B-451C-8018-EDAE817A7D40', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('EED61F41-F1D4-460D-9F06-5384036AFB89','943608AC-6C6E-4E66-8050-3167CF276969','D649629D-7003-4108-826C-34A04AA8CA13', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('0AB04F4F-6F05-496C-9E04-64CABC4A901B','943608AC-6C6E-4E66-8050-3167CF276969','53A82921-3F9B-4C89-9141-DEA96333A191', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('2509D23C-1D19-431D-B735-7B78BFC7E28D','943608AC-6C6E-4E66-8050-3167CF276969','9706C8B6-66E5-4997-9313-70CE497410AD', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('15BC4AEF-53B1-4AA9-8516-8872DB75B876','943608AC-6C6E-4E66-8050-3167CF276969','315031B4-1707-479F-9B71-765A0E4E94F5', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('5867A3BB-E83F-48B7-844D-8A8BEA7ED730','943608AC-6C6E-4E66-8050-3167CF276969','DCE087A6-6890-40FC-8648-D1D63CEF6923', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('5AB1D07E-47B4-4A0E-9ECF-8E31EEADBC74','943608AC-6C6E-4E66-8050-3167CF276969','77BC2182-F267-4536-91EA-DED955D944E0', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('E2C50A9A-BDDF-4DD5-9656-A9304AACD262','943608AC-6C6E-4E66-8050-3167CF276969','6EC549AA-939D-40FB-9382-20AFE9F786C9', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('3FA6FA27-1EBD-4CF7-AEE4-AFC7F9671EEB','943608AC-6C6E-4E66-8050-3167CF276969','233B080A-2564-4B2D-8431-63C771320381', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('30DE98E0-8B59-4A33-AACB-B7D4F94B487B','943608AC-6C6E-4E66-8050-3167CF276969','76176F45-ABE4-4781-97CC-31B03F2C3136', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('64ED9C9C-6277-4D22-9DB5-D494B3F89333','943608AC-6C6E-4E66-8050-3167CF276969','3EA0B4D8-6136-41C9-85CE-04A742D74A36', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('C430F643-34CE-49F9-AE24-F8EE0AE2960D','943608AC-6C6E-4E66-8050-3167CF276969','55046469-97E1-403E-A448-3DA4599E3663', 0, 'admin',getdate(), 0);
+INSERT INTO m_PromotionLink(ID, ProfileLevelID, ServiceRateID, Inactive, CreatedBy, CreatedDate, IsDelete) VALUES ('2C40CF4B-C842-4D08-97AB-FCC4E88C99FD','943608AC-6C6E-4E66-8050-3167CF276969','0CEC2B81-A543-4301-A852-54A336EAE044', 0, 'admin',getdate(), 0);
