@@ -1,0 +1,261 @@
+﻿@model WebsiteProject.Models.ezSiteSetting
+
+@{
+    /**/
+
+    ViewBag.Title = "New SiteSetting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.CurrentControl = "m_SiteSetting";
+}
+
+<section class="content-header">
+    <h1>
+        CẤU HÌNH SITE MỚI
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">.: Thông tin chung :.</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <b><span class="fa fa-warning text-red"></span> Các trường có dấu * là các trường bắt buộc phải nhập.</b><br />
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box-body">
+                                @Html.ValidationSummary(true, null, new { @class = "alert alert-block alert-danger" })
+                                <div class="form-horizontal">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Giờ mở cửa(*):</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.OpenTime, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                                @Html.ValidationMessageFor(model => model.OpenTime)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Email(*):</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.InfoEmail, new { htmlAttributes = new { @class = "form-control", required = "required", type = "email" } })
+                                                @Html.ValidationMessageFor(model => model.InfoEmail)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">BCC Email:</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.NotifyBCCEmail, new { htmlAttributes = new { @class = "form-control", type = "email" } })
+                                                @Html.ValidationMessageFor(model => model.NotifyBCCEmail)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">CC Email:</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.NotifyCCEmail, new { htmlAttributes = new { @class = "form-control", type = "email" } })
+                                                @Html.ValidationMessageFor(model => model.NotifyCCEmail)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Khoảng cách tới sân bay:</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.DistanceToAirport, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DistanceToAirport)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Khoảng cách tới trung tâm:</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.DistanceToCenter, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DistanceToCenter)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Thời gian tới sân bay (phút):</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.MinuteToAirPort, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.MinuteToAirPort)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Thời gian tới trung tâm (phút):</label>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.MinuteToCenter, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.MinuteToCenter)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Mã tiền tệ(*):</label>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("CurrencyCode", null, "Chọn một currency code", new { @class = "form-control", required = "required" })
+                                                @Html.ValidationMessageFor(model => model.CurrencyCode)
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Cuối tuần(*) :</label>
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("ezWeekend", (MultiSelectList)ViewBag.ezWeekendList, new { multiple = "multiple", @class = "groupList", size = 7, required = "required" })
+                                                @Html.ValidationMessageFor(model => model.Weekend)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">.: Ngôn ngữ :.</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        @for (int i = 0; i < Model.SiteSettingLang.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <li class="active"><a aria-expanded="true" href="#tab_@Model.SiteSettingLang[i].LangCode.ToLower()" data-toggle="tab">Ngôn ngữ @Model.SiteSettingLang[i].LangCode.ToUpper() </a></li>
+                            }
+                            else
+                            {
+                                <li><a aria-expanded="true" href="#tab_@Model.SiteSettingLang[i].LangCode.ToLower()" data-toggle="tab">Ngôn ngữ @Model.SiteSettingLang[i].LangCode.ToUpper() </a></li>
+                            }
+                        }
+                    </ul>
+                    <div class="tab-content">
+                        @for (int i = 0; i < Model.SiteSettingLang.Count; i++)
+                        {
+                            var active = "";
+                            if (i == 0) { active = "active"; }
+                            <div class="tab-pane @active" id="tab_@Model.SiteSettingLang[i].LangCode.ToLower()">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="box-body">
+                                                <div class="form-horizontal">
+                                                    <div class="box-body">
+                                                        @Html.HiddenFor(model => model.SiteSettingLang[i].LangCode)
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-1">Chính sách thanh toán:</label>
+                                                            <div class="col-md-11">
+                                                                @Html.TextAreaFor(model => model.SiteSettingLang[i].PaymentPolicyHtml, new { @class = "form-control" } )
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-1">Chính sách khu vui chơi:</label>
+                                                            <div class="col-md-11">
+                                                                @Html.TextAreaFor(model => model.SiteSettingLang[i].SitePolicyHtml, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-command">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" value="Thêm mới" class="btn btn-success" style="width:100%" />
+                </div>
+                <div class="col-md-6">
+                    @Html.ActionLink("Quay lại", "Index", new { state = "true" }, new { @class = "btn btn-default", style = "width:100%" })
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@section ScriptSection
+{
+    <script src="~/Scripts/inputmask.js"></script>
+    <script src="~/Scripts/inputmask.extensions.js"></script>
+    <script src="~/Scripts/inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask.js"></script>
+    <script src="~/Content/Template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <link href="~/Content/Template/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/Template/bower_components/bootstrap-duallistbox/bootstrap-duallistbox.css" rel="stylesheet" />
+    <script src="~/Content/Template/bower_components/bootstrap-duallistbox/jquery.bootstrap-duallistbox.js"></script>
+    <script src="~/Content/Template/bower_components/ckeditor/ckeditor.js"></script>
+    <script>
+        var groupList = $('.groupList').bootstrapDualListbox({
+            nonSelectedListLabel: 'Non-selected',
+            selectedListLabel: 'Selected',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: false
+        });
+
+        $(document).ready(function () {
+            $('[id$="PaymentPolicy"]').each(function () {
+                CKEDITOR.replace(this.id)
+            });
+            $('[id$="SitePolicy"]').each(function () {
+                CKEDITOR.replace(this.id)
+            });
+            $('#OpenTime').inputmask("hh:mm", { "onincomplete": function () { $(this).val(''); } });
+            $('#@Html.IdFor(model => model.DistanceToAirport)').inputmask(
+                { regex: "(\\d+(\\.\\d+)?", greedy: false },
+                {
+                    "onincomplete":
+                      function () {
+                          $(this).val('');
+                      }
+                },
+                { showMaskOnHover: false });
+                        $('#@Html.IdFor(model => model.DistanceToCenter)').inputmask(
+                { regex: "(\\d+(\\.\\d+)?", greedy: false },
+                {
+                    "onincomplete":
+                      function () {
+                          $(this).val('');
+                      }
+                },
+                { showMaskOnHover: false });
+                        $('#@Html.IdFor(model => model.MinuteToAirPort)').inputmask(
+                { regex: "(\\d+(\\.\\d+)?", greedy: false },
+                {
+                    "onincomplete":
+                      function () {
+                          $(this).val('');
+                      }
+                },
+                { showMaskOnHover: false });
+                        $('#@Html.IdFor(model => model.MinuteToCenter)').inputmask(
+                { regex: "(\\d+(\\.\\d+)?", greedy: false },
+                {
+                    "onincomplete":
+                      function () {
+                          $(this).val('');
+                      }
+                },
+                { showMaskOnHover: false });
+        });
+    </script>
+}
